@@ -9,6 +9,111 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(enter)
+        self.pushButton_2.clicked.connect(self.encode)
+        self.pushButton_3.clicked.connect(self.decode)
+        self.string=""
+    def decode(self):
+        first=[0,2,4,6,8,10,12,14,16,18,20,22,24,26,28]
+        second=[1,2,5,6,9,10,13,14,17,18,20,21,23,24,26]
+        third=[3,4,5,9,10,11,15,16,17,21,22,23,27]
+        fourth=[6,7,8,9,14,15,16,17,22,23,24,25]
+        fifth=[15,16,17,18,19,25,26,27,28]
+        e1=0
+        e2=0
+        e3=0
+        e4=0
+        e5=0
+        e0=0
+        string=window.lineEdit_6.text()
+        for counter in range(0,len(string)):
+            if string[counter]=="1":
+                e0+=1
+            if counter in first and string[counter]=="1":
+                e1=e1+1
+            if counter in second and string[counter]=="1":
+                e2=e2+1
+            if counter in third and string[counter]=="1":
+                e3=e3+1
+            if counter in fourth and string[counter]=="1":
+                e4=e4+1
+            if counter in fifth and string[counter]=="1":
+                e5=e5+1
+        e1=e1%2
+        e2=e2%2
+        e3=e3%2
+        e4=e4%2
+        e5=e5%2
+        e0=e0%2
+        print(e0,e1,e2,e3,e4,e5)
+        check=str(e5)+str(e4)+str(e3)+str(e2)+str(e1)
+        print(check)
+        S=int(check,2)
+        print(S)
+        window.lineEdit_7.setText((check))
+        r=0
+        if S==0 and e0==0:
+           pass
+        if not S==0 and e0==1:
+            r=1
+        if not S==0 and e0==0:
+            r=2
+        if S==0 and e0==1:
+            r=2
+        window.lineEdit_8.setText(str(r))
+        window.lineEdit_9.setText(str(S))
+        if r==0:
+            window.lineEdit_10.setText(str(S))
+        if r==1:
+            window.lineEdit_9.setText(str(S))
+        if r==2:
+            window.lineEdit_9.setText("Повторная передача")
+    def encode(self):
+        first=[0,2,4,6,8,10,12,14,16,18,20,22,24,26,28]
+        second=[1,2,5,6,9,10,13,14,17,18,20,21,23,24,26]
+        third=[3,4,5,9,10,11,15,16,17,21,22,23,27]
+        fourth=[6,7,8,9,14,15,16,17,22,23,24,25]
+        fifth=[15,16,17,18,19,25,26,27,28]
+        a1=0
+        a2=0
+        a3=0
+        a4=0
+        a5=0
+        string=self.string
+        for counter in range(0,len(string)):
+            if counter in first and string[counter]=="1":
+                a1=a1+1
+            if counter in second and string[counter]=="1":
+                a2=a2+1
+            if counter in third and string[counter]=="1":
+                a3=a3+1
+            if counter in fourth and string[counter]=="1":
+                a4=a4+1
+            if counter in fifth and string[counter]=="1":
+                a5=a5+1
+        string=list(string)
+        if a1%2==1:
+            string[0]="1"
+        if a2%2==1:
+            string[1]="1"
+        if a3%2==1:
+            string[3]="1"
+        if a4%2==1:
+            string[7]="1"
+        if a5%2==1:
+            string[15]="1"   
+        a1=a1%2
+        a2=a2%2
+        a3=a3%2
+        a4=a4%2
+        a5=a5%2 
+        print(a1,a2,a3,a4,a5)
+        print(string)
+        string2=""
+        for x in string:
+                string2+=x
+        window.lineEdit_5.setText(string2)
+        window.lineEdit_6.setText(string2)
+        print(int(string2,2))
 def enter():
     global window
     string=window.lineEdit.text()
@@ -17,6 +122,13 @@ def enter():
     m=math.ceil(math.log2(k))+1
     window.lineEdit_3.setText(str(m))
     window.lineEdit_4.setText(str(m+k))
+    
+    pows=[]
+    for x in range(0,m):
+        string=string[:(2**x)-1]+"0"+string[(2**x)-1:]
+        pows.append((2**x)-1)
+    print(string)
+    window.string=string
 def main():
     global window
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
