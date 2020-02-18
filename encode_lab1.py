@@ -8,6 +8,7 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         # и т.д. в файле design.py
         super().__init__()
         self.setupUi(self)
+        self.a=[]
         self.pushButton.clicked.connect(enter)
         self.pushButton_2.clicked.connect(self.encode)
         self.pushButton_3.clicked.connect(self.decode)
@@ -15,9 +16,9 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
     def decode(self):
         first=[0,2,4,6,8,10,12,14,16,18,20,22,24,26,28]
         second=[1,2,5,6,9,10,13,14,17,18,20,21,23,24,26]
-        third=[3,4,5,9,10,11,15,16,17,21,22,23,27]
-        fourth=[6,7,8,9,14,15,16,17,22,23,24,25]
-        fifth=[15,16,17,18,19,25,26,27,28]
+        third=[3,4,5,6,11,12,13,14,19,20,21,22,27,28]
+        fourth=[7,8,9,10,11,12,13,14,23,24,25,26,27,28]
+        fifth=[15,16,17,18,19,20,21,22,23,24,25,26,27,28]
         e1=0
         e2=0
         e3=0
@@ -25,6 +26,7 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         e5=0
         e0=0
         string=window.lineEdit_6.text()
+        print(string)
         for counter in range(0,len(string)):
             if string[counter]=="1":
                 e0+=1
@@ -45,6 +47,7 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         e5=e5%2
         e0=e0%2
         print(e0,e1,e2,e3,e4,e5)
+        print(self.a)
         check=str(e5)+str(e4)+str(e3)+str(e2)+str(e1)
         print(check)
         S=int(check,2)
@@ -70,9 +73,9 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
     def encode(self):
         first=[0,2,4,6,8,10,12,14,16,18,20,22,24,26,28]
         second=[1,2,5,6,9,10,13,14,17,18,20,21,23,24,26]
-        third=[3,4,5,9,10,11,15,16,17,21,22,23,27]
-        fourth=[6,7,8,9,14,15,16,17,22,23,24,25]
-        fifth=[15,16,17,18,19,25,26,27,28]
+        third=[3,4,5,6,11,12,13,14,19,20,21,22,27,28]
+        fourth=[7,8,9,10,11,12,13,14,23,24,25,26,27,28]
+        fifth=[15,16,17,18,19,20,21,22,23,24,25,26,27,28]
         a1=0
         a2=0
         a3=0
@@ -107,6 +110,11 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         a4=a4%2
         a5=a5%2 
         print(a1,a2,a3,a4,a5)
+        self.a.append(a1)
+        self.a.append(a2)
+        self.a.append(a3)
+        self.a.append(a4)
+        self.a.append(a5)
         print(string)
         string2=""
         for x in string:
