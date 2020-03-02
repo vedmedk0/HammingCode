@@ -32,8 +32,11 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         e0_string=window.lineEdit_5.text()
         string=window.lineEdit_6.text()
         print(string)
+        updated_e0=0
         e0=window.lineEdit_6.text()[0]
-        for counter in range(0,len(string)):
+        for counter in range(1,len(string)):
+            if string[counter]=="1":
+                updated_e0+=1
             if counter in first and string[counter]=="1":
                 e1=e1+1
             if counter in second and string[counter]=="1":
@@ -49,6 +52,9 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         e3=e3%2
         e4=e4%2
         e5=e5%2
+        updated_e0=updated_e0%2
+        if str(updated_e0)!=e0:
+            e0=str(updated_e0)
         self.comboBox_2.clear()
         if self.m>0:
             self.comboBox_2.addItem("e1="+str(e1))
@@ -70,13 +76,13 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         print(S)
         window.lineEdit_7.setText((check))
         r=0
-        if S==0 and e0==0:
+        if S==0 and e0=="0":
            pass
-        if (S!=0) and e0==1:
+        if (S!=0) and e0=="1":
             r=1
-        if ( S!=0) and e0==0:
+        if  S!=0 and e0=="0":
             r=2
-        if S==0 and e0==1:
+        if S==0 and e0=="1":
             r=2
         window.lineEdit_8.setText(str(r))
         window.lineEdit_9.setText(str(S))
