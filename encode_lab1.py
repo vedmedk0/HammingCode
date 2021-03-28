@@ -32,8 +32,6 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         e3 = 0
         e4 = 0
         e5 = 0
-        e0 = 0
-        e0_string = window.lineEdit_5.text()
         string = window.lineEdit_6.text()
         print(string)
         updated_e0 = 0
@@ -42,20 +40,15 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
             if string[counter] == "1":
                 updated_e0 += 1
             if counter in first and string[counter] == "1":
-                e1 = e1 + 1
+                e1 = self.inverse(e1)
             if counter in second and string[counter] == "1":
-                e2 = e2 + 1
+                e2 = self.inverse(e2)
             if counter in third and string[counter] == "1" and len(string) > 4:
-                e3 = e3 + 1
+                e3 = self.inverse(e3)
             if counter in fourth and string[counter] == "1" and len(string) > 8:
-                e4 = e4 + 1
+                e4 = self.inverse(e4)
             if counter in fifth and string[counter] == "1" and len(string) > 16:
-                e5 = e5 + 1
-        e1 = e1 % 2
-        e2 = e2 % 2
-        e3 = e3 % 2
-        e4 = e4 % 2
-        e5 = e5 % 2
+                e5 = self.inverse(e5)
         updated_e0 = updated_e0 % 2
         if str(updated_e0) != e0:
             e0 = str(updated_e0)
@@ -111,7 +104,7 @@ class ExampleApp(QtWidgets.QMainWindow, Encode.Ui_MainWindow):
         if r == 1:
 
             new_string = list(string)
-            new_string[S - 1] = str(self.inverse(int(string[S - 1])))
+            new_string[S] = str(self.inverse(int(string[S])))
             del (new_string[0])
             if self.m > 0:
                 del (new_string[0])
